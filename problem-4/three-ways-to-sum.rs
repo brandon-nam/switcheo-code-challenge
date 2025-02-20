@@ -1,3 +1,5 @@
+// First solution: adds in a for loop 
+// Time complexity: O(n)
 fn sum_to_n_a(n: i32) -> i32 {
     let mut sum = 0;
     for i in 1..n + 1 {
