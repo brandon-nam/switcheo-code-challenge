@@ -1,0 +1,13 @@
+syntax = "proto3";
+package ledger.ledger;
+
+option go_package = "ledger/x/ledger/types";
+
+message Ledger {
+  
+  string title = 1; 
+  string body = 2; 
+  string creator = 3; 
+  uint64 cost = 4; 
+  uint64 id = 5; 
+}

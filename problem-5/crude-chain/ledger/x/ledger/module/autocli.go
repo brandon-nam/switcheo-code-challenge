@@ -17,6 +17,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Use:       "params",
 					Short:     "Shows the parameters of the module",
 				},
+				{
+					RpcMethod:      "ShowLedger",
+					Use:            "show-ledger [id]",
+					Short:          "Query show-ledger",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
+
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},
@@ -27,6 +34,24 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				{
 					RpcMethod: "UpdateParams",
 					Skip:      true, // skipped because authority gated
+				},
+				{
+					RpcMethod:      "CreateLedger",
+					Use:            "create-ledger [title] [body] [cost]",
+					Short:          "Send a create-ledger tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "title"}, {ProtoField: "body"}, {ProtoField: "cost"}},
+				},
+				{
+					RpcMethod:      "CreateLedger",
+					Use:            "create-ledger [title] [body] [cost]",
+					Short:          "Send a create-ledger tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "title"}, {ProtoField: "body"}, {ProtoField: "cost"}},
+				},
+				{
+					RpcMethod:      "CreateLedger",
+					Use:            "create-ledger [title] [body] [cost]",
+					Short:          "Send a create-ledger tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "title"}, {ProtoField: "body"}, {ProtoField: "cost"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},

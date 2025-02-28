@@ -9,6 +9,12 @@ const (
 
 	// MemStoreKey defines the in-memory store key
 	MemStoreKey = "mem_ledger"
+
+	// Ledger Key
+	LedgerKey = "Ledger/value/"
+
+	// Ledger Count Key
+	LedgerCountKey = "Ledger/count/"
 )
 
 var (

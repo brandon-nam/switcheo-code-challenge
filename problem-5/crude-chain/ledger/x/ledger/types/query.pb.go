@@ -6,10 +6,6 @@ package types
 import (
 	context "context"
 	fmt "fmt"
-	io "io"
-	math "math"
-	math_bits "math/bits"
-
 	_ "github.com/cosmos/cosmos-sdk/types/query"
 	_ "github.com/cosmos/cosmos-sdk/types/tx/amino"
 	_ "github.com/cosmos/gogoproto/gogoproto"
@@ -19,6 +15,9 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	io "io"
+	math "math"
+	math_bits "math/bits"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -115,34 +114,130 @@ func (m *QueryParamsResponse) GetParams() Params {
 	return Params{}
 }
 
+type QueryShowLedgerRequest struct {
+	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (m *QueryShowLedgerRequest) Reset()         { *m = QueryShowLedgerRequest{} }
+func (m *QueryShowLedgerRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryShowLedgerRequest) ProtoMessage()    {}
+func (*QueryShowLedgerRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_df4593bd4c1bfb5a, []int{2}
+}
+func (m *QueryShowLedgerRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryShowLedgerRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryShowLedgerRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryShowLedgerRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryShowLedgerRequest.Merge(m, src)
+}
+func (m *QueryShowLedgerRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryShowLedgerRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryShowLedgerRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryShowLedgerRequest proto.InternalMessageInfo
+
+func (m *QueryShowLedgerRequest) GetId() uint64 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+type QueryShowLedgerResponse struct {
+	Ledger *Ledger `protobuf:"bytes,1,opt,name=ledger,proto3" json:"ledger,omitempty"`
+}
+
+func (m *QueryShowLedgerResponse) Reset()         { *m = QueryShowLedgerResponse{} }
+func (m *QueryShowLedgerResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryShowLedgerResponse) ProtoMessage()    {}
+func (*QueryShowLedgerResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_df4593bd4c1bfb5a, []int{3}
+}
+func (m *QueryShowLedgerResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryShowLedgerResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryShowLedgerResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryShowLedgerResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryShowLedgerResponse.Merge(m, src)
+}
+func (m *QueryShowLedgerResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryShowLedgerResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryShowLedgerResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryShowLedgerResponse proto.InternalMessageInfo
+
+func (m *QueryShowLedgerResponse) GetLedger() *Ledger {
+	if m != nil {
+		return m.Ledger
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*QueryParamsRequest)(nil), "ledger.ledger.QueryParamsRequest")
 	proto.RegisterType((*QueryParamsResponse)(nil), "ledger.ledger.QueryParamsResponse")
+	proto.RegisterType((*QueryShowLedgerRequest)(nil), "ledger.ledger.QueryShowLedgerRequest")
+	proto.RegisterType((*QueryShowLedgerResponse)(nil), "ledger.ledger.QueryShowLedgerResponse")
 }
 
 func init() { proto.RegisterFile("ledger/ledger/query.proto", fileDescriptor_df4593bd4c1bfb5a) }
 
 var fileDescriptor_df4593bd4c1bfb5a = []byte{
-	// 291 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0xcc, 0x49, 0x4d, 0x49,
-	0x4f, 0x2d, 0xd2, 0x87, 0x52, 0x85, 0xa5, 0xa9, 0x45, 0x95, 0x7a, 0x05, 0x45, 0xf9, 0x25, 0xf9,
-	0x42, 0xbc, 0x10, 0x31, 0x3d, 0x08, 0x25, 0x25, 0x98, 0x98, 0x9b, 0x99, 0x97, 0xaf, 0x0f, 0x26,
-	0x21, 0x2a, 0xa4, 0x44, 0xd2, 0xf3, 0xd3, 0xf3, 0xc1, 0x4c, 0x7d, 0x10, 0x0b, 0x2a, 0x2a, 0x93,
-	0x9e, 0x9f, 0x9f, 0x9e, 0x93, 0xaa, 0x9f, 0x58, 0x90, 0xa9, 0x9f, 0x98, 0x97, 0x97, 0x5f, 0x92,
-	0x58, 0x92, 0x99, 0x9f, 0x57, 0x0c, 0x95, 0xd5, 0x4a, 0xce, 0x2f, 0xce, 0xcd, 0x2f, 0xd6, 0x4f,
-	0x4a, 0x2c, 0x4e, 0x85, 0x58, 0xa7, 0x5f, 0x66, 0x98, 0x94, 0x5a, 0x92, 0x68, 0xa8, 0x5f, 0x90,
-	0x98, 0x9e, 0x99, 0x07, 0x56, 0x0c, 0x55, 0x2b, 0x85, 0xea, 0xb8, 0x82, 0xc4, 0xa2, 0xc4, 0x5c,
-	0xa8, 0x39, 0x4a, 0x22, 0x5c, 0x42, 0x81, 0x20, 0xdd, 0x01, 0x60, 0xc1, 0xa0, 0xd4, 0xc2, 0xd2,
-	0xd4, 0xe2, 0x12, 0x25, 0x7f, 0x2e, 0x61, 0x14, 0xd1, 0xe2, 0x82, 0xfc, 0xbc, 0xe2, 0x54, 0x21,
-	0x0b, 0x2e, 0x36, 0x88, 0x66, 0x09, 0x46, 0x05, 0x46, 0x0d, 0x6e, 0x23, 0x51, 0x3d, 0x14, 0xbf,
-	0xe9, 0x41, 0x94, 0x3b, 0x71, 0x9e, 0xb8, 0x27, 0xcf, 0xb0, 0xe2, 0xf9, 0x06, 0x2d, 0xc6, 0x20,
-	0xa8, 0x7a, 0xa3, 0x72, 0x2e, 0x56, 0xb0, 0x81, 0x42, 0x79, 0x5c, 0x6c, 0x10, 0x55, 0x42, 0x8a,
-	0x68, 0x9a, 0x31, 0x9d, 0x21, 0xa5, 0x84, 0x4f, 0x09, 0xc4, 0x4d, 0x4a, 0xb2, 0x4d, 0x97, 0x9f,
-	0x4c, 0x66, 0x12, 0x17, 0x12, 0xd5, 0xc7, 0xe6, 0x4b, 0x27, 0xfd, 0x13, 0x8f, 0xe4, 0x18, 0x2f,
-	0x3c, 0x92, 0x63, 0x7c, 0xf0, 0x48, 0x8e, 0x71, 0xc2, 0x63, 0x39, 0x86, 0x0b, 0x8f, 0xe5, 0x18,
-	0x6e, 0x3c, 0x96, 0x63, 0x88, 0x12, 0x85, 0x2a, 0xac, 0x80, 0xe9, 0x28, 0xa9, 0x2c, 0x48, 0x2d,
-	0x4e, 0x62, 0x03, 0x87, 0x8b, 0x31, 0x20, 0x00, 0x00, 0xff, 0xff, 0x19, 0xb4, 0xab, 0xe8, 0xd2,
-	0x01, 0x00, 0x00,
+	// 386 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x92, 0xcf, 0x4a, 0xeb, 0x40,
+	0x14, 0xc6, 0x33, 0xe5, 0xde, 0xc0, 0x9d, 0x8b, 0x82, 0x63, 0x6b, 0x35, 0x68, 0x6a, 0x03, 0x6a,
+	0x29, 0x98, 0xa1, 0x75, 0xe3, 0xba, 0x2b, 0x17, 0x82, 0x5a, 0x77, 0x6e, 0x64, 0x6a, 0x86, 0x34,
+	0xd0, 0xe6, 0xa4, 0x99, 0xd4, 0x5a, 0xc4, 0x8d, 0xf8, 0x00, 0x82, 0x2f, 0xe1, 0xd2, 0xc7, 0xe8,
+	0xb2, 0xe0, 0xc6, 0x95, 0x48, 0x2b, 0xf8, 0x16, 0x22, 0x9d, 0x19, 0x91, 0xfe, 0x51, 0x37, 0x99,
+	0xc3, 0x39, 0xbf, 0xf3, 0x7d, 0xdf, 0x0c, 0xc1, 0x2b, 0x0d, 0xee, 0xf9, 0x3c, 0xa6, 0xfa, 0x68,
+	0xb5, 0x79, 0xdc, 0x75, 0xa3, 0x18, 0x12, 0x20, 0x73, 0xaa, 0xe7, 0xaa, 0xc3, 0x5a, 0x60, 0xcd,
+	0x20, 0x04, 0x2a, 0xbf, 0x8a, 0xb0, 0xd2, 0x3e, 0xf8, 0x20, 0x4b, 0x3a, 0xaa, 0x74, 0x77, 0xd5,
+	0x07, 0xf0, 0x1b, 0x9c, 0xb2, 0x28, 0xa0, 0x2c, 0x0c, 0x21, 0x61, 0x49, 0x00, 0xa1, 0xd0, 0xd3,
+	0xe2, 0x19, 0x88, 0x26, 0x08, 0x5a, 0x63, 0x82, 0x2b, 0x3b, 0x7a, 0x5e, 0xaa, 0xf1, 0x84, 0x95,
+	0x68, 0xc4, 0xfc, 0x20, 0x94, 0xb0, 0x66, 0xad, 0xf1, 0x70, 0x11, 0x8b, 0x59, 0x53, 0xcc, 0x9e,
+	0xe9, 0xac, 0x72, 0xe6, 0xa4, 0x31, 0x39, 0x1a, 0x29, 0x1f, 0xca, 0x85, 0x2a, 0x6f, 0xb5, 0xb9,
+	0x48, 0x9c, 0x03, 0xbc, 0x38, 0xd6, 0x15, 0x11, 0x84, 0x82, 0x93, 0x5d, 0x6c, 0x2a, 0xe1, 0x65,
+	0xb4, 0x8e, 0x0a, 0xff, 0xcb, 0x19, 0x77, 0xec, 0xde, 0xae, 0xc2, 0x2b, 0xff, 0x7a, 0xcf, 0x39,
+	0xe3, 0xfe, 0xed, 0xa1, 0x88, 0xaa, 0x9a, 0x77, 0x0a, 0x78, 0x49, 0x0a, 0x1e, 0xd7, 0xa1, 0xb3,
+	0x2f, 0x61, 0x6d, 0x45, 0xe6, 0x71, 0x2a, 0xf0, 0xa4, 0xde, 0x9f, 0x6a, 0x2a, 0xf0, 0x9c, 0x3d,
+	0x9c, 0x9d, 0x22, 0xb5, 0xfd, 0x36, 0x36, 0x95, 0xd1, 0x37, 0xf6, 0x1a, 0xd7, 0x50, 0xf9, 0x1d,
+	0xe1, 0xbf, 0x52, 0x8a, 0x84, 0xd8, 0x54, 0xd1, 0x48, 0x7e, 0x62, 0x65, 0xfa, 0xee, 0x96, 0xf3,
+	0x13, 0xa2, 0x92, 0x38, 0x6b, 0xd7, 0x8f, 0xaf, 0x77, 0xa9, 0x2c, 0xc9, 0xd0, 0x59, 0xcf, 0x4e,
+	0x6e, 0x10, 0xc6, 0x5f, 0xf9, 0xc9, 0xc6, 0x2c, 0xc5, 0xa9, 0x97, 0xb0, 0x36, 0x7f, 0xc3, 0xb4,
+	0xf9, 0x96, 0x34, 0xcf, 0x93, 0xdc, 0x84, 0xb9, 0xa8, 0x43, 0xe7, 0x54, 0xd7, 0x97, 0x81, 0x77,
+	0x55, 0xa1, 0xbd, 0x81, 0x8d, 0xfa, 0x03, 0x1b, 0xbd, 0x0c, 0x6c, 0x74, 0x3b, 0xb4, 0x8d, 0xfe,
+	0xd0, 0x36, 0x9e, 0x86, 0xb6, 0x71, 0x92, 0xd1, 0xd8, 0xc5, 0xe7, 0x6e, 0xd2, 0x8d, 0xb8, 0xa8,
+	0x99, 0xf2, 0x9f, 0xd8, 0xf9, 0x08, 0x00, 0x00, 0xff, 0xff, 0x24, 0xe5, 0xad, 0x11, 0xea, 0x02,
+	0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -159,6 +254,8 @@ const _ = grpc.SupportPackageIsVersion4
 type QueryClient interface {
 	// Parameters queries the parameters of the module.
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
+	// Queries a list of ShowLedger items.
+	ShowLedger(ctx context.Context, in *QueryShowLedgerRequest, opts ...grpc.CallOption) (*QueryShowLedgerResponse, error)
 }
 
 type queryClient struct {
@@ -178,10 +275,21 @@ func (c *queryClient) Params(ctx context.Context, in *QueryParamsRequest, opts .
 	return out, nil
 }
 
+func (c *queryClient) ShowLedger(ctx context.Context, in *QueryShowLedgerRequest, opts ...grpc.CallOption) (*QueryShowLedgerResponse, error) {
+	out := new(QueryShowLedgerResponse)
+	err := c.cc.Invoke(ctx, "/ledger.ledger.Query/ShowLedger", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 type QueryServer interface {
 	// Parameters queries the parameters of the module.
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
+	// Queries a list of ShowLedger items.
+	ShowLedger(context.Context, *QueryShowLedgerRequest) (*QueryShowLedgerResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -190,6 +298,9 @@ type UnimplementedQueryServer struct {
 
 func (*UnimplementedQueryServer) Params(ctx context.Context, req *QueryParamsRequest) (*QueryParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Params not implemented")
+}
+func (*UnimplementedQueryServer) ShowLedger(ctx context.Context, req *QueryShowLedgerRequest) (*QueryShowLedgerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ShowLedger not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -214,6 +325,24 @@ func _Query_Params_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_ShowLedger_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryShowLedgerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ShowLedger(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ledger.ledger.Query/ShowLedger",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ShowLedger(ctx, req.(*QueryShowLedgerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var Query_serviceDesc = _Query_serviceDesc
 var _Query_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "ledger.ledger.Query",
@@ -222,6 +351,10 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Params",
 			Handler:    _Query_Params_Handler,
+		},
+		{
+			MethodName: "ShowLedger",
+			Handler:    _Query_ShowLedger_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -284,6 +417,69 @@ func (m *QueryParamsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *QueryShowLedgerRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryShowLedgerRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryShowLedgerRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Id != 0 {
+		i = encodeVarintQuery(dAtA, i, uint64(m.Id))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryShowLedgerResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryShowLedgerResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryShowLedgerResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Ledger != nil {
+		{
+			size, err := m.Ledger.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintQuery(dAtA []byte, offset int, v uint64) int {
 	offset -= sovQuery(v)
 	base := offset
@@ -312,6 +508,31 @@ func (m *QueryParamsResponse) Size() (n int) {
 	_ = l
 	l = m.Params.Size()
 	n += 1 + l + sovQuery(uint64(l))
+	return n
+}
+
+func (m *QueryShowLedgerRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Id != 0 {
+		n += 1 + sovQuery(uint64(m.Id))
+	}
+	return n
+}
+
+func (m *QueryShowLedgerResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Ledger != nil {
+		l = m.Ledger.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
 	return n
 }
 
@@ -430,6 +651,161 @@ func (m *QueryParamsResponse) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if err := m.Params.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryShowLedgerRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryShowLedgerRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryShowLedgerRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			m.Id = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Id |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryShowLedgerResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryShowLedgerResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryShowLedgerResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Ledger", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Ledger == nil {
+				m.Ledger = &Ledger{}
+			}
+			if err := m.Ledger.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
