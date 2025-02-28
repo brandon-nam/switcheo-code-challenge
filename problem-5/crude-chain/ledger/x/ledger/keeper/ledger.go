@@ -66,7 +66,13 @@ func (k Keeper) SetLedger(ctx sdk.Context, ledger types.Ledger) {
 }
 
 func (k Keeper) RemoveLedger(ctx sdk.Context, id uint64) {
+	// get the LedgerCount
+	count := k.GetLedgerCount(ctx)
+
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.LedgerKey))
 	store.Delete(GetLedgerIdBytes(id))
+
+	// decrement the LedgerCount by one
+	k.SetLedgerCount(ctx, count - 1)
 }
