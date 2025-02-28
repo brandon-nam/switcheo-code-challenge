@@ -59,8 +59,14 @@ func (k Keeper) GetLedger(ctx sdk.Context, id uint64) (val types.Ledger, found b
 }
 
 func (k Keeper) SetLedger(ctx sdk.Context, ledger types.Ledger) {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.LedgerKey))
+	b := k.cdc.MustMarshal(&ledger)
+	store.Set(GetLedgerIdBytes(ledger.Id), b)
+}
+
+func (k Keeper) RemoveLedger(ctx sdk.Context, id uint64) {
     storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
     store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.LedgerKey))
-    b := k.cdc.MustMarshal(&ledger)
-    store.Set(GetLedgerIdBytes(ledger.Id), b)
+    store.Delete(GetLedgerIdBytes(id))
 }

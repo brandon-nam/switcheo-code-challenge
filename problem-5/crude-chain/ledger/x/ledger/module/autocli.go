@@ -66,6 +66,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a update-ledger tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "title"}, {ProtoField: "body"}, {ProtoField: "cost"}, {ProtoField: "id"}},
 				},
+				{
+					RpcMethod:      "DeleteLedger",
+					Use:            "delete-ledger [id]",
+					Short:          "Send a delete-ledger tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

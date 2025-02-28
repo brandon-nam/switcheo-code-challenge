@@ -19,6 +19,7 @@ service Msg {
   rpc UpdateParams (MsgUpdateParams) returns (MsgUpdateParamsResponse);
   rpc CreateLedger (MsgCreateLedger) returns (MsgCreateLedgerResponse);
   rpc UpdateLedger (MsgUpdateLedger) returns (MsgUpdateLedgerResponse);
+  rpc DeleteLedger (MsgDeleteLedger) returns (MsgDeleteLedgerResponse);
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
@@ -60,4 +61,12 @@ message MsgUpdateLedger {
 }
 
 message MsgUpdateLedgerResponse {}
+
+message MsgDeleteLedger {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteLedgerResponse {}
 
