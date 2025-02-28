@@ -31,6 +31,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
 
+				{
+					RpcMethod:      "ListLedgersCostFilter",
+					Use:            "list-ledgers-cost-filter [min-cost] [max-cost]",
+					Short:          "Query list-ledgers-cost-filter",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "minCost"}, {ProtoField: "maxCost"}},
+				},
+
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},

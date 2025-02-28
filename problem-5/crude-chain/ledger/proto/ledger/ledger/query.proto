@@ -31,6 +31,12 @@ service Query {
     option (google.api.http).get = "/ledger/ledger/list_ledger";
   
   }
+  
+  // Queries a list of ListLedgersCostFilter items.
+  rpc ListLedgersCostFilter (QueryListLedgersCostFilterRequest) returns (QueryListLedgersCostFilterResponse) {
+    option (google.api.http).get = "/ledger/ledger/list_ledgers_cost_filter/{minCost}/{maxCost}";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -55,6 +61,17 @@ message QueryListLedgerRequest {
 }
 
 message QueryListLedgerResponse {
+  repeated Ledger                                 ledger     = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryListLedgersCostFilterRequest {
+  uint64                                minCost    = 1;
+  uint64                                maxCost    = 2;
+  cosmos.base.query.v1beta1.PageRequest pagination = 3;
+}
+
+message QueryListLedgersCostFilterResponse {
   repeated Ledger                                 ledger     = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }

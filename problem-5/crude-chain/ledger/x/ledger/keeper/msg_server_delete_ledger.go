@@ -15,12 +15,12 @@ func (k msgServer) DeleteLedger(goCtx context.Context, msg *types.MsgDeleteLedge
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	val, found := k.GetLedger(ctx, msg.Id)
-    if !found {
-        return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", msg.Id))
-    }
-    if msg.Creator != val.Creator {
-        return nil, errorsmod.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
-    }
-    k.RemoveLedger(ctx, msg.Id)
-    return &types.MsgDeleteLedgerResponse{}, nil
+	if !found {
+		return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", msg.Id))
+	}
+	if msg.Creator != val.Creator {
+		return nil, errorsmod.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
+	}
+	k.RemoveLedger(ctx, msg.Id)
+	return &types.MsgDeleteLedgerResponse{}, nil
 }
