@@ -18,6 +18,7 @@ service Msg {
   // parameters. The authority defaults to the x/gov module account.
   rpc UpdateParams (MsgUpdateParams) returns (MsgUpdateParamsResponse);
   rpc CreateLedger (MsgCreateLedger) returns (MsgCreateLedgerResponse);
+  rpc UpdateLedger (MsgUpdateLedger) returns (MsgUpdateLedgerResponse);
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
@@ -48,4 +49,15 @@ message MsgCreateLedger {
 message MsgCreateLedgerResponse {
   uint64 id = 1;
 }
+
+message MsgUpdateLedger {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string title   = 2;
+  string body    = 3;
+  uint64 cost    = 4;
+  uint64 id      = 5;
+}
+
+message MsgUpdateLedgerResponse {}
 

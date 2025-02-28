@@ -27,6 +27,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgCreateLedger int = 100
 
+	opWeightMsgUpdateLedger = "op_weight_msg_update_ledger"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgUpdateLedger int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -61,6 +65,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		ledgersimulation.SimulateMsgCreateLedger(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgUpdateLedger int
+	simState.AppParams.GetOrGenerate(opWeightMsgUpdateLedger, &weightMsgUpdateLedger, nil,
+		func(_ *rand.Rand) {
+			weightMsgUpdateLedger = defaultWeightMsgUpdateLedger
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgUpdateLedger,
+		ledgersimulation.SimulateMsgUpdateLedger(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -90,6 +105,14 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgCreateLedger,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				ledgersimulation.SimulateMsgCreateLedger(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgUpdateLedger,
+			defaultWeightMsgUpdateLedger,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				ledgersimulation.SimulateMsgUpdateLedger(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),

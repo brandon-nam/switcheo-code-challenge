@@ -25,6 +25,12 @@ service Query {
     option (google.api.http).get = "/ledger/ledger/show_ledger/{id}";
   
   }
+  
+  // Queries a list of ListLedger items.
+  rpc ListLedger (QueryListLedgerRequest) returns (QueryListLedgerResponse) {
+    option (google.api.http).get = "/ledger/ledger/list_ledger";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -41,6 +47,15 @@ message QueryShowLedgerRequest {
 }
 
 message QueryShowLedgerResponse {
-  Ledger ledger = 1;
+  Ledger ledger = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryListLedgerRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryListLedgerResponse {
+  repeated Ledger                                 ledger     = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 

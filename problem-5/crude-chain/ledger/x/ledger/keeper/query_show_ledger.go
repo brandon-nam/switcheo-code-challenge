@@ -25,5 +25,5 @@ func (k Keeper) ShowLedger(goCtx context.Context, req *types.QueryShowLedgerRequ
 		return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, "Ledger of such ID not found!")
 	}
 
-	return &types.QueryShowLedgerResponse{Ledger: &val}, nil
+	return &types.QueryShowLedgerResponse{Ledger: val}, nil
 }

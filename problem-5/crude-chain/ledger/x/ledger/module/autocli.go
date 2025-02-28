@@ -24,6 +24,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
 				},
 
+				{
+					RpcMethod:      "ListLedger",
+					Use:            "list-ledger",
+					Short:          "Query list-ledger",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
+				},
+
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},
@@ -52,6 +59,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Use:            "create-ledger [title] [body] [cost]",
 					Short:          "Send a create-ledger tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "title"}, {ProtoField: "body"}, {ProtoField: "cost"}},
+				},
+				{
+					RpcMethod:      "UpdateLedger",
+					Use:            "update-ledger [title] [body] [cost] [id]",
+					Short:          "Send a update-ledger tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "title"}, {ProtoField: "body"}, {ProtoField: "cost"}, {ProtoField: "id"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
